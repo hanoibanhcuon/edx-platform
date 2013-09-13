@@ -1,0 +1,15 @@
+<%! from django.utils.translation import ugettext as _ %>
+
+<div class="text-sr" id="mathjax-accessibility-message" aria-hidden="false">
+	${
+		_(
+		"This page features MathJax technology to render mathematical "
+		"formulae. Please visit the {link_start}MathPlayer Download "
+		"Page{link_end} to download the plugin for your browser. Note: this "
+		"plugin is only available for Internet Explorer 6 through 9.").format(
+			link_start = u'<a href="//www.dessci.com/en/products/mathplayer/'
+			              'download.htm">',
+			link_end = u'</a>'
+		)
+	}
+</div>
