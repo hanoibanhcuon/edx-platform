@@ -27,6 +27,10 @@ class CachingDescriptorSystem(MakoDescriptorSystem):
         modulestore: the module store that can be used to retrieve additional
         modules
 
+        course_entry: the originally fetched enveloped course_structure w/ branch and course_id info.
+        Callers to _load_item provide an override but that function ignores the provided structure and
+        only looks at the branch and course_id
+
         module_data: a dict mapping Location -> json that was cached from the
             underlying modulestore
         """
@@ -37,15 +41,13 @@ class CachingDescriptorSystem(MakoDescriptorSystem):
         self.module_data = module_data
         # Compute inheritance
         modulestore.inherit_settings(
-            course_entry.get('blocks', {}),
-            course_entry.get('blocks', {}).get(course_entry.get('root'))
+            course_entry['structure'].get('blocks', {}),
+            course_entry['structure'].get('blocks', {}).get(course_entry['structure'].get('root'))
         )
         self.default_class = default_class
         self.local_modules = {}
 
     def _load_item(self, usage_id, course_entry_override=None):
-        # TODO ensure all callers of system.load_item pass just the id
-
         if isinstance(usage_id, BlockUsageLocator) and isinstance(usage_id.usage_id, LocalId):
             try:
                 return self.local_modules[usage_id]
@@ -69,6 +71,10 @@ class CachingDescriptorSystem(MakoDescriptorSystem):
     def xblock_from_json(self, class_, usage_id, json_data, course_entry_override=None):
         if course_entry_override is None:
             course_entry_override = self.course_entry
+        else:
+            # most recent retrieval is most likely the right one for next caller
+            self.course_entry['branch'] = course_entry_override['branch']
+            self.course_entry['course_id'] = course_entry_override['course_id']
         # most likely a lazy loader or the id directly
         definition = json_data.get('definition', {})
         definition_id = self.modulestore.definition_locator(definition)
@@ -78,7 +84,7 @@ class CachingDescriptorSystem(MakoDescriptorSystem):
             usage_id = LocalId()
 
         block_locator = BlockUsageLocator(
-            version_guid=course_entry_override['_id'],
+            version_guid=course_entry_override['structure']['_id'],
             usage_id=usage_id,
             course_id=course_entry_override.get('course_id'),
             branch=course_entry_override.get('branch')
@@ -103,7 +109,7 @@ class CachingDescriptorSystem(MakoDescriptorSystem):
                 json_data,
                 self,
                 BlockUsageLocator(
-                    version_guid=course_entry_override['_id'],
+                    version_guid=course_entry_override['structure']['_id'],
                     usage_id=usage_id
                 ),
                 error_msg=exc_info_to_str(sys.exc_info())
