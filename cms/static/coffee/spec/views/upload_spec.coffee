@@ -1,4 +1,4 @@
-require ["js/models/uploads", "js/views/uploads", "js/models/chapter", "sinon"], (FileUpload, UploadDialog, Chapter, sinon) ->
+define ["js/models/uploads", "js/views/uploads", "js/models/chapter", "sinon"], (FileUpload, UploadDialog, Chapter, sinon) ->
 
     feedbackTpl = readFixtures('system-feedback.underscore')
 
