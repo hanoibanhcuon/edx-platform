@@ -174,6 +174,7 @@ def upload_asset(request, org, course, coursename):
         content.thumbnail_location = thumbnail_location
 
     # then commit the content
+    # TODO set locked attr appropriately
     contentstore().save(content)
     del_cached_content(content.location)
 
