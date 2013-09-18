@@ -13,3 +13,26 @@
     }
   }
 }
+
+// HTML Module
+.xmodule_HtmlModule {
+
+  // basic table styling control granted to course authors
+  table {
+
+    td, th {
+
+      &.cont-justified-left {
+        text-align: left !important; // nasty, but needed to override the bad specificity of the xmodule css selectors
+      }
+
+      &.cont-justified-right {
+        text-align: right !important; // nasty, but needed to override the bad specificity of the xmodule css selectors
+      }
+
+      &.cont-justified-center {
+        text-align: center !important; // nasty, but needed to override the bad specificity of the xmodule css selectorsstyles
+      }
+    }
+  }
+}

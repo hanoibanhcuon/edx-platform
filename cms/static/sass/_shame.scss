@@ -22,6 +22,31 @@ body.dashboard {
   }
 }
 
+// view - course updates
+body.updates {
+
+  // needed styles to sync up any table formatting done here that is similar to the HTML xmodule
+  .update-contents {
+
+    table {
+
+      td, th {
+
+        &.cont-justified-left {
+          text-align: left !important; // nasty, but needed to override the bad specificity of the xmodule css selectors
+        }
+
+        &.cont-justified-right {
+          text-align: right !important; // nasty, but needed to override the bad specificity of the xmodule css selectors
+        }
+
+        &.cont-justified-center {
+          text-align: center !important; // nasty, but needed to override the bad specificity of the xmodule css selectorsstyles
+        }
+      }
+    }
+  }
+}
 
 // yes we have no boldness today - need to fix the resets
 body strong,
@@ -29,9 +54,7 @@ body b {
   font-weight: 700;
 }
 
-// known things to do (paint the fence, sand the floor, wax on/off)
 // ====================
-
 
 // known things to do (paint the fence, sand the floor, wax on/off):
 

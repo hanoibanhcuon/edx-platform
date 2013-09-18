@@ -188,3 +188,24 @@ h1.top-header {
   @include transition( all .2s $ease-in-out-quad 0s);
 }
 
+// ====================
+
+// elements - tables
+table {
+
+  td, th {
+
+    // basic table styling control granted to course authors
+    &.cont-justified-left {
+      text-align: left !important; // nasty, but needed to override the bad specificity of the xmodule css selectors
+    }
+
+    &.cont-justified-right {
+      text-align: right !important; // nasty, but needed to override the bad specificity of the xmodule css selectors
+    }
+
+    &.cont-justified-center {
+      text-align: center !important; // nasty, but needed to override the bad specificity of the xmodule css selectors
+    }
+  }
+}
