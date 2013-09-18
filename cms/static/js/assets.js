@@ -80,13 +80,14 @@ function showUploadModal(e) {
 
     });
     $('.file-input').bind('change.startUpload', startUpload);
-    $modalCover.show();
+    $(".modal-cover").show();
 }
 
 function hideModal(e) {
     if (e) {
         e.preventDefault();
     }
+    var $modalCover = $(".modal-cover");
     // Unit editors do not want the modal cover to hide when users click outside
     // of the editor. Users must press Cancel or Save to exit the editor.
     // module_edit adds and removes the "is-fixed" class.
