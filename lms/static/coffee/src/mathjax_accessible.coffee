@@ -9,9 +9,10 @@ $ ->
 			false
 
 	isBrowserCompatible = (boolean) ->
-		if $.browser.msie and $.browser.version >= 6 and $.browser.version <=9
-			true
-		false
+		isCompatible = false
+		if $('#mathplayer-browser-message').is('.is-ie-compatible')
+			isCompatible = true
+		isCompatible
 
 	# detect if there is mathjax on the page
 	# if not, set 'aria-hidden' to 'true'
