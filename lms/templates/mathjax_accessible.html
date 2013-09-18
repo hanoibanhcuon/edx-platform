@@ -1,7 +1,7 @@
 <%! from django.utils.translation import ugettext as _ %>
 
 <div class="sr message-accessibility message" id="mathjax-accessibility-message" aria-hidden="false">
-	<p title="mathplayer-install-instructions">${
+	<p class="copy">${
 		_(
 		"This page features MathJax technology to render mathematical "
 		"formulae. Please visit the {link_start}MathPlayer Download "
@@ -17,10 +17,10 @@
 <div class="sr message-accessibility message" id="mathplayer-browser-message" aria-hidden="true" />
 <![endif]-->
 
-<![if (lt IE6)|(gt IE 9)|!(IE)]>
+<!--[if (lt IE6)|(gt IE 9)|!(IE)]><!-->
 <div class="sr message-accessibility message" id="mathplayer-browser-message" aria-hidden="false">
-<![endif]>
-	<p title="mathplayer-browser-compatibility">
+<!--[endif]-->
+	<p class="copy">
 	 ${_("Your browser does not support the MathPlayer plugin. To use "
 	 	 "MathPlayer, please use Internet Explorer 6 through 9.")}
 	 </p>
