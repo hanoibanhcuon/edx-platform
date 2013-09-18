@@ -1,36 +1,22 @@
 import logging
-import json
-import os
-import tarfile
-import shutil
-import cgi
-import re
 from functools import partial
-from tempfile import mkdtemp
-from path import path
 
-from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.contrib.auth.decorators import login_required
 from django_future.csrf import ensure_csrf_cookie
 from django.core.urlresolvers import reverse
-from django.core.servers.basehttp import FileWrapper
-from django.core.files.temp import NamedTemporaryFile
-from django.views.decorators.http import require_POST, require_http_methods
+from django.views.decorators.http import require_POST
 
 from mitxmako.shortcuts import render_to_response
 from cache_toolbox.core import del_cached_content
-from auth.authz import create_all_course_groups
 
-from xmodule.modulestore.xml_importer import import_from_xml
 from xmodule.contentstore.django import contentstore
-from xmodule.modulestore.xml_exporter import export_to_xml
 from xmodule.modulestore.django import modulestore
 from xmodule.modulestore import Location
 from xmodule.contentstore.content import StaticContent
 from xmodule.util.date_utils import get_default_time_display
 from xmodule.modulestore import InvalidLocationError
-from xmodule.exceptions import NotFoundError, SerializationError
+from xmodule.exceptions import NotFoundError
 
 from .access import get_location_and_verify_access
 from util.json_request import JsonResponse
